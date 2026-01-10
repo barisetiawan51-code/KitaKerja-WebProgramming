@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "../ui/button";
 import { FiPlus } from "react-icons/fi";
+import PriceFormmatter from "@/app/utils/price-formatter";
 
 const productList = [
   {
@@ -56,14 +57,14 @@ const productList = [
 
 const ProductSection = () => {
   return (
-    <section id="product-section" className="container mx-auto mt-32">
+    <section id="product-section" className="container mx-auto mt-32 mb-52">
       <h2 className="font-bold italic text-4xl text-center mb-11">
         <span className="text-primary">OUR </span>PRODUCTS
       </h2>
       <div className="grid grid-cols-4 gap-5">
         {productList.map((product, index) => (
           <Link
-            href="#"
+            href={`/product/${product.name}`}
             key={index}
             className="p-1.5 bg-white hover:drop-shadow-xl duration-300"
           >
@@ -83,11 +84,7 @@ const ProductSection = () => {
             <div className="flex justify-between mb-8">
               <div className="text-gray-500">{product.category}</div>
               <div className="font-medium text-primary">
-                {Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  maximumSignificantDigits: 3,
-                }).format(product.price)}
+                {PriceFormmatter(product.price)}
               </div>
             </div>
           </Link>
