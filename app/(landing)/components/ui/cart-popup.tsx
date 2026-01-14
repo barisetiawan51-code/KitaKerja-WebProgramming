@@ -5,6 +5,7 @@ import { FiArrowRight, FiTrash2 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/use-cart-store";
 import { getImageUrl } from "@/app/lib/api";
+import { toast, ToastContainer } from "react-toastify";
 
 const CartPopup = () => {
   const { push } = useRouter();
@@ -12,11 +13,15 @@ const CartPopup = () => {
   const { items, removeItem } = useCartStore();
 
   const handleCheckout = () => {
+    if (items.length === 0) {
+      toast.warn("Your cart is empty. Add some product first!");
+      return;
+    }
     push("/checkout");
   };
 
   const totalPrice = items.reduce(
-    (total, item) => total + item.price + item.qty,
+    (total, item) => total + item.price * item.qty,
     0
   );
 
@@ -79,6 +84,15 @@ const CartPopup = () => {
           Checkout Now <FiArrowRight />
         </Button>
       </div>
+      <ToastContainer
+        position="top-center"
+        theme="light"
+        toastClassName={() =>
+          "relative flex p-6 min-h-10 rounded-2xl justify-between overflow-hidden cursor-pointer bg-white text-slate-800 shadow-2xl border border-slate-100 items-center gap-4 font-medium"
+        }
+        hideProgressBar={true}
+        autoClose={2000}
+      />
     </div>
   );
 };

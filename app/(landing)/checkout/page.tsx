@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const Checkout = () => {
   const { push } = useRouter();
-  const { customerInfo, setCustomerInfo } = useCartStore();
+  const { customerInfo, setCustomerInfo, items } = useCartStore();
   const [formData, setFormData] = useState<CustomerInfo>({
     customerName: "",
     customerContact: null,
@@ -17,6 +17,10 @@ const Checkout = () => {
   });
 
   const handlePayment = () => {
+    if (items.length === 0) {
+      toast.warn("Your cart is empty. Please select a product first.");
+      return;
+    }
     if (
       !formData.customerName ||
       !formData.customerContact ||
