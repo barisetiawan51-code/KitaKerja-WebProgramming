@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "../globals.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -29,6 +31,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <main>{children}</main>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          style={{ zIndex: 9999 }}
+        />
       </body>
     </html>
   );

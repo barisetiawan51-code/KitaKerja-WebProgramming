@@ -13,6 +13,11 @@
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
   --font-poppins: var(--font-poppins);
+
+  /* Breakpoint Tampilan Responsive*/
+  --breakpoint-hp: 375px; /* Standar Handphone */
+  --breakpoint-mac: 1512px; /* Standar Macbook */
+  --breakpoint-dekstop: 1920px; /* Standar Desktop */
 }
 
 html {
