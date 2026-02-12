@@ -47,7 +47,6 @@ const LoginPage = () => {
       toast.error("Incorrect email or password entered", {
         position: "bottom-right",
         autoClose: 3000,
-        theme: "light",
       });
       setPassword("");
       console.error("Login error", err);

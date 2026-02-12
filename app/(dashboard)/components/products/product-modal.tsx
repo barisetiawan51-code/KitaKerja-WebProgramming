@@ -69,8 +69,17 @@ const ProductModal = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setIsSubmitting(true);
     e.preventDefault();
+
+    if (formData.stock < 0) {
+      toast.error("Stock cannot be negative!", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
     try {
       const data = new FormData();
       data.append("name", formData.name);
